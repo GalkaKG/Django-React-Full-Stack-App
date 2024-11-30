@@ -1,7 +1,6 @@
 import react from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import { BrowserRouter, Routes, Navigation, Navigate, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Navigate, Route } from 'react-router-dom'
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
@@ -32,6 +31,7 @@ function App() {
             }
         />
         <Route path='/login' element={<Login />} />
+        <Route path='/logout' element={<Logout />} />
         <Route path='/register' element={<RegisterAndLogout />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
