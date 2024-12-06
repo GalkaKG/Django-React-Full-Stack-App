@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+    section {
+      padding: 1rem;
+    }
+  
+    #features .feature {
+      flex: 1 1 100%;
+    }
+  
+    #how-it-works .step {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    #featured-courses .course-card {
+      width: 100%;
+    }
+  }
+  

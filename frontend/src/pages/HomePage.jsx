@@ -21,6 +21,7 @@
 // export default HomePage;
 
 import React from "react";
+import NavBar from "../components/NavBar";
 import HeroSection from "../components/HeroSection";
 import CoreFeatures from "../components/CoreFeatures";
 import HowItWorks from "../components/HowItWorks";
@@ -30,10 +31,14 @@ import FeaturedCourses from "../components/FeaturedCourses";
 // import Gamification from "../components/Gamification";
 import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
+import "./styles/HomePage.scss"
+import "./styles/responsive.scss"
 
 function HomePage() {
   return (
     <div className="home-page">
+      <NavBar /> {/* Add the NavBar */}
+
       {/* Hero Section */}
       <section id="hero">
         <HeroSection />
