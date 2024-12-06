@@ -155,3 +155,6 @@ CORS_ALLOW_CREDENTIALS = True
 AUTH_USER_MODEL = 'users.CustomUser'
 
 ASGI_APPLICATION = 'backend.asgi.application'
+
+LOGIN_REDIRECT_URL = '/'  # Redirect to home page after successful login
+LOGOUT_REDIRECT_URL = '/'  # Redirect to home page after logout
