@@ -6,12 +6,14 @@ import CoreFeatures from "./components/CoreFeatures";
 import HowItWorks from "./components/HowItWorks";
 import FeaturedCourses from "./components/FeaturedCourses";
 import CallToAction from "./components/CallToAction";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/register" element={<Register />} />
+        <Route path="/users/login" element={<LoginForm />} />
         
         <Route path="/" element={ <HomePage />} />
 
