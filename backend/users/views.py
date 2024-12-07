@@ -16,7 +16,9 @@ class RegisterView(APIView):
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
+        confirm_password = request.data.get('confirm_password')
         email = request.data.get('email')
+        accept_terms = request.data.get('accept_terms')
 
         # Check for missing fields
         if not username or not password or not email:
@@ -41,12 +43,27 @@ class RegisterView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Check for password strength (optional)
-        if len(password) < 8:
+        # # Check for password strength (optional)
+        # if len(password) < 8:
+        #     return Response(
+        #         {"error": "Password must be at least 8 characters long."},
+        #         status=status.HTTP_400_BAD_REQUEST
+        #     )
+
+        # Ensure passwords match
+        if password != confirm_password:
             return Response(
-                {"error": "Password must be at least 8 characters long."},
+                {"error": "Passwords do not match."},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+        # Check if the user accepted terms
+        if not accept_terms:
+            return Response(
+                {"error": "You must accept the terms and conditions."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
 
         # Create the user
         user = CustomUser.objects.create_user(username=username, password=password, email=email)

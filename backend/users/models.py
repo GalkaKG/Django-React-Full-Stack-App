@@ -31,8 +31,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'email'  # We use email as the unique identifier for authentication
-    REQUIRED_FIELDS = ['username']  # List any additional fields here
+    USERNAME_FIELD = 'username'  # We use email as the unique identifier for authentication
+    REQUIRED_FIELDS = ['email']  # List any additional fields here
 
     def __str__(self):
         return self.email
