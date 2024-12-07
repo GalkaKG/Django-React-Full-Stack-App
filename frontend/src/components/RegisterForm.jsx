@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import "./styles/RegisterForm.scss";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -14,18 +16,34 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      setSuccess("");
+      return;
+    }
+
+    if (!acceptTerms) {
+      setError("You must accept the terms and conditions.");
+      setSuccess("");
+      return;
+    }
+
     try {
       const response = await api.post("users/register/", {
         username,
-        password,
         email,
+        password,
+        confirm_password: confirmPassword,
+        accept_terms: acceptTerms,
       });
       setSuccess(response.data.message);
       setError("");
       setUsername("");
-      setPassword("");
       setEmail("");
-      navigate('/');
+      setPassword("");
+      setConfirmPassword("");
+      setAcceptTerms(false);
+      navigate("/login");
     } catch (err) {
       setError(err.response?.data?.error || "An error occurred");
       setSuccess("");
@@ -68,6 +86,28 @@ function RegisterForm() {
             placeholder="Enter your password"
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        <div className="form-group terms">
+          <input
+            type="checkbox"
+            id="acceptTerms"
+            checked={acceptTerms}
+            onChange={(e) => setAcceptTerms(e.target.checked)}
+          />
+          <label htmlFor="acceptTerms">
+            I accept the <a href="/terms">Terms and Conditions</a>
+          </label>
         </div>
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
