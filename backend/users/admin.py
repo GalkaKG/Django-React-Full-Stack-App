@@ -1,4 +1,3 @@
-# admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
@@ -10,6 +9,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ('is_active', 'is_staff', 'date_joined')
     search_fields = ('email', 'username')
     ordering = ('-date_joined',)
+    readonly_fields = ('date_joined',)
 
     # Fields for the user creation and editing forms
     fieldsets = (

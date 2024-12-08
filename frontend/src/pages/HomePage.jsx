@@ -22,17 +22,14 @@ function HomePage() {
       </section>
       {/* Core Features */}
       <section id="features">
-        <h2>Core Features</h2>
         <CoreFeatures />
       </section>
       {/* How It Works */}
       <section id="how-it-works">
-        <h2>How SkillSphere Works</h2>
         <HowItWorks />
       </section>
       {/* Featured Courses */}
       <section id="featured-courses">
-        <h2>Featured Courses and Workshops</h2>
         <FeaturedCourses />
       </section>
       {/* Testimonials

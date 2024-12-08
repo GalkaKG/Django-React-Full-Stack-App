@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.http import HttpResponse
 
 
 class RegisterView(APIView):
@@ -130,3 +131,58 @@ class LogoutView(APIView):
                 {"error": "An error occurred during logout."},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Return user profile data
+        user = request.user
+        return Response({"username": user.username, "email": user.email})
+
+    def put(self, request):
+        # Update user profile data
+        user = request.user
+        user.username = request.data.get("username", user.username)
+        user.email = request.data.get("email", user.email)
+        user.save()
+        return Response({"username": user.username, "email": user.email})
+
+        if request.method == "GET":
+            # Return user profile data
+            user = request.user
+            return Response({"username": user.username, "email": user.email})
+
+        elif request.method == "PUT":
+            # Update user profile data
+            user = request.user
+            user.username = request.data.get("username", user.username)
+            user.email = request.data.get("email", user.email)
+            user.save()
+            return Response({"username": user.username, "email": user.email})
+        
+
+from rest_framework_simplejwt.tokens import RefreshToken
+from allauth.socialaccount.models import SocialAccount
+
+class SocialLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        provider = request.data.get('provider')  # google, facebook, linkedin_oauth2
+        token = request.data.get('access_token')
+
+        if not provider or not token:
+            return Response({"error": "Provider and access token are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            social_account = SocialAccount.objects.get(provider=provider, uid=token)
+            user = social_account.user
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }, status=status.HTTP_200_OK)
+        except SocialAccount.DoesNotExist:
+            return Response({"error": "Social account not found."}, status=status.HTTP_400_BAD_REQUEST)

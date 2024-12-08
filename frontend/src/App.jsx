@@ -22,7 +22,8 @@ function App() {
         <Route path="/features" element={<CoreFeatures />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/courses" element={<FeaturedCourses />} />
-        <Route path="call-to-action" element={<CallToAction />} />
+        <Route path="/call-to-action" element={<CallToAction />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
