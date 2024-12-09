@@ -1,0 +1,52 @@
+.footer {
+    background-color: #f4f4f4;
+    padding: 2rem 0;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .footer-description {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links, .footer-social-media {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li, .footer-social-media li {
+    display: inline;
+    margin: 0 1rem;
+  }
+  
+  .footer-links a, .footer-social-media a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .footer-social-media a:hover {
+    color: #0073e6;
+  }
+  
+  .footer-bottom {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    color: #777;
+  }
+  
+  .footer-careers {
+    margin-top: 1rem;
+  }
+  
+  .footer-careers a {
+    text-decoration: none;
+    color: #0073e6;
+  }
+  

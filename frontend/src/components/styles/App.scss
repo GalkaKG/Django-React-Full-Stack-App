@@ -1,0 +1,29 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .hero-section {
+    text-align: center;
+    background: url('path/to/hero-image.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 60px 20px;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.5em;
+    color: white;
+  }
+  
+  .core-features .features {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .core-features .feature {
+    text-align: center;
+    flex: 1;
+    padding: 20px;
+  }
+  

@@ -35,6 +35,8 @@ ALLOWED_HOSTS = ["*"]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
@@ -150,4 +152,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
 ASGI_APPLICATION = 'backend.asgi.application'
+
+LOGIN_REDIRECT_URL = '/'  # Redirect to home page after successful login
+LOGOUT_REDIRECT_URL = '/'  # Redirect to home page after logout
