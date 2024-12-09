@@ -14,6 +14,7 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     list_filter = ('category', 'instructor', 'is_published')
     ordering = ['created_at']
+    readonly_fields = ['download_count'] 
     
     # Display the formatted Markdown content for a preview
     def formatted_content(self, obj):

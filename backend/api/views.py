@@ -13,20 +13,18 @@ from django.db.models import F
 
 
 def download_course(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
-
-    if not course.files:
-        raise Http404("Course file not available.")
+    course = Course.objects.get(id=course_id)
 
     # Increment the download count
     course.download_count += 1
     course.save()
 
-    # Serve the course file
-    response = HttpResponse(course.files, content_type='application/octet-stream')
-    response['Content-Disposition'] = f'attachment; filename={course.files.name}'
-    return response
+    # Assuming you are returning the file to the user (you can use the correct file path)
+    file_path = course.file.path  # Change this depending on your model
+    response = HttpResponse(open(file_path, 'rb'), content_type='application/zip')
+    response['Content-Disposition'] = f'attachment; filename="{course.title}.zip"'
 
+    return response
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

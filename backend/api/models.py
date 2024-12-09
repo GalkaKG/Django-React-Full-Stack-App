@@ -35,7 +35,7 @@ class Course(models.Model):
     instructor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="courses", on_delete=models.CASCADE, null=True, blank=True)
     files = models.FileField(upload_to=course_file_upload_to, null=True, blank=True)
 
-    download_count = models.PositiveIntegerField(default=0)
+    download_count = models.PositiveIntegerField(default=0, editable=False)
 
     def __str__(self):
         return self.title
